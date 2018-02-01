@@ -70,10 +70,14 @@ Start MQTT Sky Remote-
     python mqtt-sky-remote.py
 
 Send a command using your MQTT publisher of choice with the following topic-
+    
+    sky/[NAME OF BOX]/send
+    
+The message body should be one of the supported commands listed in the 'Supported Commands' Section.
 
-   sky/[NAME OF BOX]/send
+The following is an example using mosquitto_pub to send the play command-
 
-The message body should be one of the supported commands listed below.
+    mosquitto_pub -h 127.0.0.1 -t sky/LOUNGE_TV/send -m play
 
 ### Supported Commands
 
