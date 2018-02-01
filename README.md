@@ -24,6 +24,7 @@ All contributions and feedback are much appreciated.
 
 ### Installation
 
+    apt-get install python-pip python-setuptools python-dev python
     git clone https://github.com/marrold/mqtt-sky-remote
     cd mqtt-sky-remote
     pip install -r requirements.txt
