@@ -25,6 +25,8 @@ All contributions and feedback are much appreciated.
 ### Installation
 
     git clone
+    cd mqtt-sky-remote
+    pip install -r requirements.txt
     
 ### Configuration
 
