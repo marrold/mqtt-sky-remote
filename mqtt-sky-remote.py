@@ -45,8 +45,7 @@ def make_service(config, log, connections, reactor=None):
     for name in config['SKY_BOXES']:
 
         host = config['SKY_BOXES'][name]['HOST']
-        #49160 / 5900
-        port = 49160 if config['SKY_BOXES'][name]['SKY_Q'] is False else 49160
+        port = 5900 if config['SKY_BOXES'][name]['SKY_Q'] is False else 49160
         uri = ('tcp:%s:%s' % (host, port))
 
         skyFactory = sky.ConnectionHandler(config, log, connections, name)
