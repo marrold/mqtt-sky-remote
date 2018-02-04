@@ -50,26 +50,16 @@ sky_commands = {
 
 
 def s_to_bytes(string):
-    return "".join("{:02x}".format(ord(c)) for c in string)
+    new_string = string.decode('ascii')
+    new_string = new_string.rstrip("\n\r")
 
-
-def is_ascii(text):
-    if isinstance(text, unicode):
-        try:
-            text.encode('ascii')
-        except UnicodeEncodeError:
-            return False
+    if new_string.isprintable():
+        return new_string
     else:
-        try:
-            text.decode('ascii')
-        except UnicodeDecodeError:
-            return False
-    return True
-
-
-def is_printable(d):
-    return all(c in string.printable for c in d)
-
+        new_string = ""
+        for char in string:
+            new_string = new_string + str(char).zfill(2)
+        return new_string
 
 def send_sky_command(log, target_name, target_endpoint, request):
 
@@ -109,13 +99,8 @@ class Login(Protocol):
         self.connections.pop(self.name, None)
 
     def logPacket(self, data, state):
-
-        if is_printable(data):
-            self.log.debug('[SKY] (%s) Received: %s [%s]' % (self.name, s_to_bytes(data), data.rstrip("\n\r")))
-            self.log.debug('[SKY] (%s) New State: %s' % (self.name, state))
-        else:
-            self.log.debug('[SKY] (%s) Received: %s' % (self.name, s_to_bytes(data)))
-            self.log.debug('[SKY] (%s) New State: %s' % (self.name, state))
+        self.log.debug('[SKY] (%s) Received: %s' % (self.name, s_to_bytes(data)))
+        self.log.debug('[SKY] (%s) New State: %s' % (self.name, state))
 
     def dataReceived(self, data):
 

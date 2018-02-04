@@ -64,7 +64,7 @@ class MQTTService(ClientService):
         subslist = []
 
         for name in self.config['SKY_BOXES']:
-            topic = ("sky/%s/send" % name)
+            topic = "sky/%s/send" % name
             self.log.info("[MQTT] Subscribing to %s" % topic)
             sub = self.protocol.subscribe(topic, 2)
             sub.addCallbacks(_logGrantedQoS, _logFailure)
@@ -86,8 +86,8 @@ class MQTTService(ClientService):
         if split_topic[2] == 'send':
             self.target = split_topic[1]
             if self.target in self.connections:
-                self.log.info("[SKY] (%s) Sending Command: %s." % (self.target, payload))
-                sky.send_sky_command(self.log, self.target, self.connections[self.target], str(payload))
+                self.log.info("[SKY] (%s) Sending Command: %s." % (self.target, payload.decode("ascii") ))
+                sky.send_sky_command(self.log, self.target, self.connections[self.target], payload.decode('ascii'))
             else:
                 self.log.info("[SKY] (%s) Box is offline. Unable to send the command %s" % (self.target, payload))
 

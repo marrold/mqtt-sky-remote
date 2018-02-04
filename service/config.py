@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
-import ConfigParser
+from configparser import ConfigParser
 from socket import gethostbyname
 import sys
 
-
 def build_config(_config_file):
 
-    config = ConfigParser.ConfigParser()
+    config = ConfigParser()
 
     if not config.read(_config_file):
         sys.exit('Configuration file \'' + _config_file + '\' is not a valid. Exiting.')
@@ -51,13 +50,13 @@ def build_config(_config_file):
                 })
 
             else:
-                CONFIG['SKY_BOXES'].update({section: {
+                CONFIG['SKY_BOXES'].update({str(section): {
                     'HOST': gethostbyname(config.get(section, 'HOST')),
                     'SKY_Q': config.getboolean(section, 'SKY_Q')
                 }})
 
-    except ConfigParser.Error, err:
-        print "Cannot parse configuration file. %s" % err
+    except ConfigParser.Error as err:
+        print(("Cannot parse configuration file. %s" % err))
         sys.exit('Could not parse configuration file, exiting.')
 
     return CONFIG
