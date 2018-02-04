@@ -16,6 +16,7 @@ All contributions and feedback are much appreciated.
 * Supports all known remote control commands
 * Supports username and password MQTT login
 * Supports MQTT over TLS.
+* Supports Python >= 3 only
 
 ### Caveats
 
@@ -24,10 +25,10 @@ All contributions and feedback are much appreciated.
 
 ### Installation
 
-    apt-get install python-pip python-setuptools python-dev python
+    apt-get install python3-pip python3-setuptools python3-dev python3
     git clone https://github.com/marrold/mqtt-sky-remote
     cd mqtt-sky-remote
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
     
 ### Configuration
 
@@ -67,7 +68,7 @@ It should be self explanatory. Any section below 'MQTT' is considered to be a Sk
 
 Start MQTT Sky Remote-
 
-    python mqtt-sky-remote.py
+    python3 mqtt-sky-remote.py
 
 Send a command using your MQTT publisher of choice with the following topic-
     
